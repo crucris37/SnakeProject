@@ -71,6 +71,7 @@ class AbstractSnake(windowWidth: Int, windowHeight: Int) {
       println("All Pellets Length After  = " + AllPellets.length)
       executed = false
     }
+
     def update(): Unit ={
       for(x <- SnakeBodyLength.length-1 until 0 by -1){
         if(x > 0){

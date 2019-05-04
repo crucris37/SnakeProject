@@ -5,6 +5,7 @@ import javafx.scene.input.KeyCode
 import scalafx.scene.paint.Color
 import scalafx.scene.shape.{Circle, Rectangle}
 
+
 class SnakeWithAbstract {
   val ClassPlayer: AbstractSnake = new AbstractSnake(800, 600)
   //var SnakeBodyLength: ArrayBuffer[Rectangle] = ArrayBuffer(player)
@@ -47,7 +48,6 @@ class SnakeWithAbstract {
       case _ => println(keyCode.getName + " pressed with no action" + player.translateX.value.toString)
     }
   }
-
 
   def snakeMoving(): Unit = {
     ClassPlayer.snakeMoving()

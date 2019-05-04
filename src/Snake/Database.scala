@@ -10,8 +10,6 @@ object Database {
 
   setupTable()
 
-
-
   def setupTable(): Unit = {
     val statement = connection.createStatement()
     statement.execute("CREATE TABLE IF NOT EXISTS players (username TEXT, lastUpdate BIGINT)")

@@ -1,3 +1,0 @@
-package Snake
-
-class SnakeActors {}
