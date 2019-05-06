@@ -22,15 +22,17 @@ object Desktop extends JFXApp{
   this.stage = new PrimaryStage {
     this.title = "Snake Game!"
     val abstractSnake = new SnakeWithAbstract()
-
+//    val snake = new Snake
     scene = new Scene(windowWidth, windowHeight) {
       content = List(sceneGraphics)
       addEventHandler(KeyEvent.KEY_PRESSED, (event: KeyEvent) => abstractSnake.inputKey(event.getCode))
-      abstractSnake.createPelletsClass()
+//      addEventHandler(KeyEvent.KEY_PRESSED, (event: KeyEvent) => snake.inputKey(event.getCode))
+//      abstractSnake.createPelletsClass()
     }
 
     val update: Long => Unit = (time: Long) => {
       abstractSnake.snakeMoving()
+//      snake.snakeMoving()
     }
     AnimationTimer(update).start()
   }

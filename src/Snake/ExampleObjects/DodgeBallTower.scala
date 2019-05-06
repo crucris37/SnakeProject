@@ -2,7 +2,7 @@ package Snake.ExampleObjects
 
 import Snake.physics.PhysicsVector
 import play.api.libs.json.{JsValue, Json}
-import towers.model.genetics.genes.Gene
+//import towers.model.genetics.genes.Gene
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -69,16 +69,6 @@ class DodgeBallTower(val x: Int, val y: Int) extends GameObject {
   def aimFire(jsonGameState: String): List[Projectile] = {
     // TODO: Bonus Objective
     List()
-  }
-
-
-  // Suggested Genetic Algorithm setup
-  def getFitnessFunction(targetPlayer: Player): PhysicsVector => Double = {
-    null
-  }
-
-  def vectorIncubator(genes: List[Gene]): PhysicsVector = {
-    null
   }
 
 }

@@ -5,9 +5,11 @@ import scalafx.scene.shape.Rectangle
 import scala.collection.mutable.{ArrayBuffer, Map}
 
 
-class AbstractSnake(windowWidth: Int, windowHeight: Int) {
+class AbstractSnake(val windowWidth: Int, val windowHeight: Int) {
 
-  var GodSpeed: Int = 2
+  var color: String = "red"
+
+  var GodSpeed: Int = 30
   var zoomTranslate: Int = 0
   var translate: Int = 0
   val grid: Int = 2
@@ -22,12 +24,21 @@ class AbstractSnake(windowWidth: Int, windowHeight: Int) {
   var ySum: Int = 0
 
   val player = new Body((Math.random() * windowWidth).toInt + Size , (Math.random() * windowHeight).toInt + Size)
+  val spacing = 10
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//  val mapOfBody: List[Map[Body, Map[String, Double]]]
+  var bodyOfPLayer: ArrayBuffer[Body] = ArrayBuffer(player) ////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   val AllPellets: ArrayBuffer[Pellet] = ArrayBuffer()
-  
+
+  def distanceFormula(x: Double, y: Double): Double ={
+    Math.sqrt(Math.pow(player.centerX - x, 2) + Math.pow(player.centerY - y, 2))
+  }
+
   val testPellets: Map[Pellet, Any] = Map()
 
-  var SnakeBodyLength: ArrayBuffer[Body] = ArrayBuffer(player)
+  var SnakeBodyLength: ArrayBuffer[Body] = ArrayBuffer()
 
   var SnakeBodyLengthMutable: ArrayBuffer[Rectangle] = ArrayBuffer()
 
@@ -64,22 +75,43 @@ class AbstractSnake(windowWidth: Int, windowHeight: Int) {
 
   def snakeMoving(): Unit ={
 
-    if(executed){
-      println("Create Pellets Reached")
-      println("All Pellets Length Before = " + AllPellets.length)
-      createPellets(20)
-      println("All Pellets Length After  = " + AllPellets.length)
-      executed = false
+    if(bodyOfPLayer.length < 300){
+      val currentCenterX:  Double  = player.centerX
+      val currentCenterY: Double = player.centerY
+      val bodyPart = new Body(currentCenterX, currentCenterY)
+      bodyOfPLayer += bodyPart
+    }else{
+//      bodyOfPLayer.dropRight(5)
     }
 
-    def update(): Unit ={
-      for(x <- SnakeBodyLength.length-1 until 0 by -1){
-        if(x > 0){
-          SnakeBodyLength(x).centerX = SnakeBodyLength(x-1).centerX
-          SnakeBodyLength(x).centerY = SnakeBodyLength(x-1).centerY
-        }
-      }
-    }
+
+//    for(x <- bodyOfPLayer.length-1 to 1 by -1){
+//      if(x != 0){
+//        bodyOfPLayer(x).centerX = bodyOfPLayer(x-1).centerX
+//        bodyOfPLayer(x).centerY = bodyOfPLayer(x-1).centerY
+//      }else{
+//        bodyOfPLayer(x).centerX = bodyOfPLayer(x).centerX
+//        bodyOfPLayer(x).centerY = bodyOfPLayer(x).centerY
+//      }
+//    }
+//    if(executed){
+////      println("Create Pellets Reached")
+////      println("All Pellets Length Before = " + AllPellets.length)
+//      createPellets(20)
+////      println("All Pellets Length After  = " + AllPellets.length)
+//      executed = false
+//    }
+
+//    def update(): Unit ={
+//      for(x <- SnakeBodyLength.length-1 until 0 by -1){
+//        if(x > 0){
+//          SnakeBodyLength(x).centerX = SnakeBodyLength(x-1).centerX
+//          SnakeBodyLength(x).centerY = SnakeBodyLength(x-1).centerY
+//        }
+//      }
+//    }
+
+    // TODO: Implement this feature if possible wrong type of arrayBuffer
     def DIED(): Unit ={
       for(bodyPart <- SnakeBodyLength.reverse){
         if(SnakeBodyLength.length != 1){
@@ -136,14 +168,17 @@ class AbstractSnake(windowWidth: Int, windowHeight: Int) {
     }
     player.centerX += xSum
     player.centerY += ySum
-    update()
+//    update()
     removePellets()
   }
 }
 
 
 
-
+//val bodyPart2 = new Body(player.centerX - spacing*2, player.centerY - spacing*2)
+//val bodyPart3 = new Body(player.centerX - spacing*3, player.centerY - spacing*3)
+//val bodyPart4 = new Body(player.centerX - spacing*4, player.centerY - spacing*4)
+//val bodyPart5 = new Body(player.centerX - spacing*5, player.centerY - spacing*5)
 
 
 
@@ -235,8 +270,7 @@ class AbstractSnake(windowWidth: Int, windowHeight: Int) {
 
 
 
-
-
+/////////////////////// Charlie ///////////////////////
 //                     .-'`     `'.
 //              __    /  .-. .-.   \
 //           .'`__`'.| /  ()|  ()\  \
@@ -269,7 +303,8 @@ class AbstractSnake(windowWidth: Int, windowHeight: Int) {
 //             `-'\_'            (_/-'
 
 
+///////////////////    Jobin    ///////////////////
 //      _             _             _             _    |  See No Evil +
 //     c -.          { ".          c "}          c ".  |  Hear No Evil +
-//\_   / \   +  \_   /\\   +  \_   / \/  =  \_   / \^  |  Speak No Evil =
-//  \_| ||        \_|  |        \_|  |        \_| ||   |  One Bored Monkey
+//\_   / \   +  \_   /\\   +  \_   / \/  =  \_   / \^  |  Speak No Evil +
+//  \_| ||        \_|  |        \_|  |        \_| ||   |  failure
